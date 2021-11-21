@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" i
+          ntegrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <title>Offcanvas template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../css/editor.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="offcanvas.css" rel="stylesheet">
+
+    <title>Admin panel</title>
+</head>
+
+
+<body>
+
+<!-- Навигация  -->
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:utext="${user.getEmail()}">with roles: </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link">with roles: </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:utext="${user.getRolesToString()}">Notifications</a>
+            </li>
+
+            <li class="nav-item dropdown">
+
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+
+            <a class="dropdown-item" href="/logout">Logout</a>
+        </form>
+    </div>
+</nav>
+
+
+<!-- Разметка  -->
+
+<div class="row" style="">
+
+    <div class="  col-md-2">
+        <ul class="nav flex-column nav-pills ">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="/admin">Admin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user">User</a>
+            </li>
+        </ul>
+
+    </div>
+
+
+    <div class="col-md-10">
+        <br>
+
+
+        <h1>Admin panel</h1>
+
+
+        <!-- Вкладки -->
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="nav-userstable" data-toggle="tab" href="#userstable"
+                   role="tab" aria-controls="home" aria-selected="true">Users table</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="nav-newuser" data-toggle="tab" href="#newuser"
+                   role="tab" aria-controls="profile" aria-selected="false">New user</a>
+            </li>
+
+        </ul>
+
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="userstable" role="tabpanel" aria-labelledby="nav-userstable">
+
+                <!-- Таблица Юзерс  -->
+
+                <div style="height: 68px;">
+                    <br>
+                    <h5>All users</h5></div>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Roles</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                    <tr th:each="usr : ${users}">
+                        <td><a th:href="@{/admin/{id}/edit(id=${usr.getId()})}" th:utext="${usr.getId()}">Id</a></td>
+
+                        <!--            <td th:utext ="${usr.getId()}">...</td>-->
+                        <td th:utext="${usr.getName()}">...</td>
+                        <td th:utext="${usr.getEmail()}">...</td>
+                        <td th:utext="${usr.getRolesToString()}">...</td>
+                        <td>
+
+                            <button type="button" class="btn btn-success"
+                                    data-toggle="modal" data-target="#edituser"
+                                    th:attr="data-target='#EDIT' + ${user.getId()}"
+                            >Edit
+                            </button>
+                        </td>
+
+                        <td>
+
+                            <button type="button" class="btn btn-danger"
+                                    th:attr="data-target='#DELETE' + ${user.getId()}"
+                            >Delete</button>
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- edit  -->
+            <div th:each="user : ${users}">
+                <div class="modal hide" th:id="${'EDIT' + user.getId()}">
+                    <div class="modal-dialog modal-content" >
+                        <form th:action="@{/admin/{id}(id=${user.getId()})}" th:method="PATCH">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit User</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body mx-auto text-center" style="background: white; width : 40%">
+                                <p class="text-center">Id</p>
+                                <input th:type="number" class="form-control" th:name="id"
+                                       th:value="${user.getId()}" readonly/>
+
+                                <p>Name</p>
+                                <input th:type="text" class="form-control" th:name="name"
+                                       th:value="${user.getName()}"/>
+
+                                <p>Email</p>
+                                <input th:type="text" class="form-control" th:name="email"
+                                       th:value="${user.getEmail()}"/>
+
+                                <p>Password</p>
+                                <input th:type="text" class="form-control" th:name="password"
+                                       th:value="${user.getPassword()}"/>
+
+                                <p>Role</p>
+                                <select th:object="${roles}" class="form-control" name="roles_string" multiple size="2" readonly>
+                                    <option th:each="role : ${user.getRoles()}"
+                                            th:value="${role}"
+                                            th:text="${role}">
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button th:type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button th:type="submit" class="btn btn-primary">Edit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- delete  -->
+
+
+
+
+
+
+
+
+            <div class="tab-pane fade" id="newuser" role="tabpanel" aria-labelledby="nav-newuser">
+                <!--            NEw user-->
+
+
+                <br>
+                <h5>Add new user</h5>
+
+
+                <div class="container bg-white text-center p-3">
+                    <form th:method="POST" th:action="@{/admin}" th:object="${user}"
+                          style="width: 300px;"
+                          class="form-signin mx-auto font-weight-bold">
+                        <p>
+                            <label>Name</label>
+                            <input class="form-control form-control-sm" type="text"
+                                   th:field="*{name}" placeholder="First name" required autofocus>
+                        </p>
+                        <p>
+                            <label>Email</label>
+                            <input class="form-control form-control-sm" type="text" required
+                                   th:field="*{email}" placeholder="Last name">
+                        </p>
+
+                        <p>
+                            <label>Password</label>
+                            <input class="form-control form-control-sm" type="password"
+                                   th:field="*{password}" placeholder="Password" required>
+                        </p>
+
+                        <p>
+                            <label>Role</label>
+                            <select id="roleList" name="roleList" class="form-control"
+                                    multiple size="2" th:field="*{roles}">
+
+                                <option th:each="role : ${user.getRoles()}"
+                                        th:value="${role}"
+                                        th:text="${role}">
+                                </option>
+                            </select>
+                        </p>
+                        <button type="submit" class="btn btn-success">Add new user</button>
+                    </form>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</body>
+</html>

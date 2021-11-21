@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Новый пользователь</title>
+</head>
+<body>
+
+
+<form th:method="POST" th:action="@{/admin}" th:object="${user}">
+<!--    <input type=checkbox id=adminId name=roles[] value="ROLE_ADMIN">-->
+<!--    <label for="adminId">Админ</label>-->
+    <br/>
+    <br/>
+    <br/>
+
+    <label for="name">Введите имя: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+
+    <br/>
+    <br/>
+    <br/>
+
+    <label for="email">Введите e-mail: </label>
+    <input type="text" th:field="*{email}" id="email"/>
+
+    <br/>
+    <br/>
+    <br/>
+
+    <label for="password">Введите пароль: </label>
+    <input type="text" th:field="*{password}" id="password"/>
+
+
+    <br/>
+    <br/>
+    <br/>
+
+    <label for="roles">Введите роли: </label>
+    <input type="text" th:field="*{roles}" id="roles"/>
+
+
+    <br/>
+    <br/>
+    <br/>
+
+<!--    <label for="roles">Введите роли: </label>-->
+<!--    <input type="text" th:field="*{roles}" id="roles"/>-->
+
+
+    <br/>
+    <br/>
+    <br/>
+
+    <input type="submit" value="Добавить нового пользователя"/>
+
+</form>
+</body>
+</html>
