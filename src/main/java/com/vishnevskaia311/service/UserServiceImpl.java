@@ -1,6 +1,7 @@
 package com.vishnevskaia311.service;
 
 import com.vishnevskaia311.dao.UserDaoImpl;
+import com.vishnevskaia311.model.Role;
 import com.vishnevskaia311.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -19,6 +21,7 @@ public class UserServiceImpl implements UserService {
 
         this.userDao = userDao;
     }
+
 
     @Override
     public User getUserByName(String name) {
@@ -49,6 +52,8 @@ public class UserServiceImpl implements UserService {
     public void delete(Long id) {
         userDao.delete(id);
     }
+
+
 
 
 }

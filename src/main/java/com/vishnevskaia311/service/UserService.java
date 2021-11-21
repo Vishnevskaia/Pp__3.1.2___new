@@ -2,7 +2,9 @@ package com.vishnevskaia311.service;
 
 
 import java.util.List;
+import java.util.Set;
 
+import com.vishnevskaia311.model.Role;
 import com.vishnevskaia311.model.User;
 
 
@@ -19,4 +21,5 @@ public interface UserService {
     void update( User updatedUser, Long id);
 
     void delete(Long id);
+
 }

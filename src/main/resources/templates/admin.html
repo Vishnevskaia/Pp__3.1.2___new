@@ -194,6 +194,29 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- rerere  -->
+
+
+
+
+
+
+
+
+
             <!-- delete  -->
 
 
@@ -237,7 +260,7 @@
                             <select id="roleList" name="roleList" class="form-control"
                                     multiple size="2" th:field="*{roles}">
 
-                                <option th:each="role : ${user.getRoles()}"
+                                <option th:each="role : ${allroles}"
                                         th:value="${role}"
                                         th:text="${role}">
                                 </option>
