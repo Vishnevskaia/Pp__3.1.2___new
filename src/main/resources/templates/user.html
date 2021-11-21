@@ -1,47 +1,139 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Пользователь</title>
 
-    СТРАНИЦА ПОЛЬЗОВАТЕЛЯ
-    <style>
-        ul{
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        li {
-            display: inline-block;
-        }
-    </style>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" i
+          ntegrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <title>Offcanvas template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../css/editor.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="offcanvas.css" rel="stylesheet">
+
+    <title>User panel</title>
 </head>
+
+
 <body>
-<br/>
-<br/>
-<li>ID пользователя:    <div th:utext ="${user.getId()}">...</div></li>
-<br/>
-<br/>
-<li>Имя пользователя:    <div th:utext ="${user.getName()}">...</div></li>
-<br/>
-<br/>
-<li>e-mail:    <div th:utext ="${user.getEmail()}">...</div></li>
-<br/>
-<br/>
 
-<div sec:authorize= "hasAuthority('ADMIN_ROLE')">
-    <a href="admin/new">Создать нового пользователя</a>
-</div>
-<br/>
-<br/>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="ВЫХОД" />
-</form>
+<!-- Навигация  -->
 
-</ul>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:utext="${user.getEmail()}">with roles: </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link">with roles: </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:utext="${user.getRolesToString()}">Notifications</a>
+            </li>
+
+            <li class="nav-item dropdown">
+
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+
+            <a class="dropdown-item" href="/logout">Logout</a>
+        </form>
+    </div>
+</nav>
+
+
+<!-- Разметка  -->
+
+<div class="row" style="">
+
+    <div class="  col-md-2">
+        <ul class="nav flex-column nav-pills ">
+            <li class="nav-item">
+                <a class="nav-link active" href="/user">User</a>
+            </li>
+        </ul>
+
+    </div>
+
+
+    <div class="col-md-10">
+        <br>
+
+
+        <h1>User information-page</h1>
+
+
+
+
+                <div style="height: 68px;">
+                    <br>
+                    <h5>About user</h5></div>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Roles</th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                    <tr th:each="usr : ${user}">
+                        <td><a th:href="@{/admin/{id}/edit(id=${usr.getId()})}" th:utext="${usr.getId()}">Id</a></td>
+
+                        <td th:utext="${usr.getName()}">...</td>
+                        <td th:utext="${usr.getEmail()}">...</td>
+                        <td th:utext="${usr.getRolesToString()}">...</td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+
+
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </body>
 </html>
-

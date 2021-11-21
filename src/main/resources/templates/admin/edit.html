@@ -1,35 +1,35 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Обновление данных пользователя</title>
-</head>
-<body>
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <title>Обновление данных пользователя</title>-->
+<!--</head>-->
+<!--<body>-->
 
-<form th:method="PATCH" th:action="@{/admin/{id}(id=${user.getId()})}" th:object="${user}">
-  <label for="name">Введите имя: </label>
-  <input type="text" th:field="*{name}" id="name"/>
-  <br/>
+<!--<form th:method="PATCH" th:action="@{/admin/{id}(id=${user.getId()})}" th:object="${user}">-->
+<!--  <label for="name">Введите имя: </label>-->
+<!--  <input type="text" th:field="*{name}" id="name"/>-->
+<!--  <br/>-->
 
-  <label for="email">Введите email: </label>
-  <input type="text" th:field="*{email}" id="email"/>
-  <br/>
+<!--  <label for="email">Введите email: </label>-->
+<!--  <input type="text" th:field="*{email}" id="email"/>-->
+<!--  <br/>-->
 
-  <label for="password">Введите пароль: </label>
-  <input type="text" th:field="*{password}" id="password"/>
-  <br/>
+<!--  <label for="password">Введите пароль: </label>-->
+<!--  <input type="text" th:field="*{password}" id="password"/>-->
+<!--  <br/>-->
 
-  <label for="roles">Введите роли: </label>
-  <input type="text" th:field="*{roles}" id="roles"/>
-  <br/>
+<!--  <label for="roles">Введите роли: </label>-->
+<!--  <input type="text" th:field="*{roles}" id="roles"/>-->
+<!--  <br/>-->
 
 
-  <input type="submit" value="Изменить данные пользователя"/>
+<!--  <input type="submit" value="Изменить данные пользователя"/>-->
 
-  <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">
-    <input type="submit" value="Удалить поьзователя"/>
-  </form>
-</form>
-</body>
-</html>
+<!--  <form th:method="DELETE" th:action="@{/admin/{id}(id=${user.getId()})}">-->
+<!--    <input type="submit" value="Удалить поьзователя"/>-->
+<!--  </form>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
