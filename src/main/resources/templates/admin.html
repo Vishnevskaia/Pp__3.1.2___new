@@ -130,7 +130,7 @@
 
                             <button type="button" class="btn btn-success"
                                     data-toggle="modal" data-target="#edituser"
-                                    th:attr="data-target='#EDIT' + ${user.getId()}"
+                                    th:attr="data-target='#EDIT' + ${usr.getId()}"
                             >Edit
                             </button>
                         </td>
@@ -138,7 +138,7 @@
                         <td>
 
                             <button type="button" class="btn btn-danger"
-                                    th:attr="data-target='#DELETE' + ${user.getId()}"
+                                    th:attr="data-target='#DELETE' + ${usr.getId()}"
                             >Delete</button>
                         </td>
 
@@ -149,10 +149,12 @@
             </div>
 
             <!-- edit  -->
-            <div th:each="user : ${users}">
-                <div class="modal hide" th:id="${'EDIT' + user.getId()}">
+            <div th:each="us : ${users}">
+                <div class="modal hide" th:id="${'EDIT' + us.getId()}">
                     <div class="modal-dialog modal-content" >
-                        <form th:action="@{/admin/{id}(id=${user.getId()})}" th:method="PATCH">
+
+
+                        <form th:action="@{/admin/{id}(id=${us.getId()})}" th:method="PATCH">
                             <div class="modal-header">
                                 <h5 class="modal-title">Edit User</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -161,33 +163,37 @@
                             </div>
                             <div class="modal-body mx-auto text-center" style="background: white; width : 40%">
                                 <p class="text-center">Id</p>
-                                <input th:type="number" class="form-control" th:name="id"
-                                       th:value="${user.getId()}" readonly/>
 
                                 <p>Name</p>
                                 <input th:type="text" class="form-control" th:name="name"
-                                       th:value="${user.getName()}"/>
+                                       th:value="${us.name}"/>
 
                                 <p>Email</p>
                                 <input th:type="text" class="form-control" th:name="email"
-                                       th:value="${user.getEmail()}"/>
+                                       th:value="${us.email}"/>
 
                                 <p>Password</p>
                                 <input th:type="text" class="form-control" th:name="password"
-                                       th:value="${user.getPassword()}"/>
+                                       th:value="${us.password}"/>
 
                                 <p>Role</p>
-                                <select th:object="${roles}" class="form-control" name="roles_string" multiple size="2" readonly>
-                                    <option th:each="role : ${user.getRoles()}"
+                                <select th:value="${us.roles}" class="form-control"
+                                        th:name="roles"
+                                        name="roles_string" multiple size="2" >
+                                    <option th:each="role : ${allroles}"
                                             th:value="${role}"
                                             th:text="${role}">
                                 </select>
+
                             </div>
                             <div class="modal-footer">
                                 <button th:type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button th:type="submit" class="btn btn-primary">Edit</button>
                             </div>
                         </form>
+
+
+
                     </div>
                 </div>
             </div>
@@ -227,6 +233,8 @@
 
 
             <div class="tab-pane fade" id="newuser" role="tabpanel" aria-labelledby="nav-newuser">
+
+
                 <!--            NEw user-->
 
 
