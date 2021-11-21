@@ -34,17 +34,6 @@ public class AdminController {
         return "admin";
     }
 
-//    @GetMapping("/new")
-//    public String addUser(Model model) {
-//        model.addAttribute("user", new User());
-//        return "admin/new";
-//    }
-//
-//    @PostMapping()
-//    public String create(@ModelAttribute("user") User user) {
-//        userService.save(user);
-//        return "redirect:/admin";
-//    }
 
     @GetMapping("/admin")
     public String addUser(Model model) {

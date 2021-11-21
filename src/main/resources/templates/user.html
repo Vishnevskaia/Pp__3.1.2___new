@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      >
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,7 +33,7 @@
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" th:utext="${user.getEmail()}">with roles: </a>
+                <a class="nav-link"th:utext="${user.getEmail()}">with roles: </a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link">with roles: </a>
@@ -65,9 +67,15 @@
     <div class="  col-md-2">
         <ul class="nav flex-column nav-pills ">
             <li class="nav-item">
+                <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')"  href="/admin">Admin</a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link active" href="/user">User</a>
             </li>
         </ul>
+
+
 
     </div>
 
