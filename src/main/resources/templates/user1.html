@@ -1,47 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Пользователь</title>
-
-    СТРАНИЦА ПОЛЬЗОВАТЕЛЯ
-    <style>
-        ul{
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        li {
-            display: inline-block;
-        }
-    </style>
+    <title></title>
 </head>
 <body>
-<br/>
-<br/>
-<li>ID пользователя:    <div th:utext ="${user.getId()}">...</div></li>
-<br/>
-<br/>
-<li>Имя пользователя:    <div th:utext ="${user.getName()}">...</div></li>
-<br/>
-<br/>
-<li>e-mail:    <div th:utext ="${user.getEmail()}">...</div></li>
-<br/>
-<br/>
-
-<div sec:authorize= "hasAuthority('ADMIN_ROLE')">
-    <a href="admin/new">Создать нового пользователя</a>
+<div>
+    <form method="post" action="/login">
+        <input name="j_username"/>
+        <input name="j_password"/>
+        <input type="submit"/>
+    </form>
 </div>
-<br/>
-<br/>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="ВЫХОД" />
-</form>
-
-</ul>
 </body>
+</html>
 </html>
 
