@@ -138,8 +138,10 @@
                         <td>
 
                             <button type="button" class="btn btn-danger"
+                                    data-toggle="modal" data-target="#deleteuser"
                                     th:attr="data-target='#DELETE' + ${usr.getId()}"
-                            >Delete</button>
+                            >Delete
+                            </button>
                         </td>
 
                     </tr>
@@ -163,7 +165,8 @@
                             </div>
                             <div class="modal-body mx-auto text-center" style="background: white; width : 40%">
                                 <p class="text-center">Id</p>
-
+                                <input th:type="text" class="form-control" th:name="id"
+                                       th:value="${us.id}" readonly/>
                                 <p>Name</p>
                                 <input th:type="text" class="form-control" th:name="name"
                                        th:value="${us.name}"/>
@@ -179,7 +182,7 @@
                                 <p>Role</p>
                                 <select th:value="${us.roles}" class="form-control"
                                         th:name="roles"
-                                        name="roles_string" multiple size="2" >
+                                        name="roles" multiple size="2" >
                                     <option th:each="role : ${allroles}"
                                             th:value="${role}"
                                             th:text="${role}">
@@ -204,6 +207,58 @@
 
 
 
+<!--             delete-->
+
+            <div th:each="us : ${users}">
+                <div class="modal hide" th:id="${'DELETE' + us.getId()}">
+                    <div class="modal-dialog modal-content" >
+
+
+                        <form th:action="@{/admin/{id}(id=${us.getId()})}" th:method="DELETE">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Delete User</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body mx-auto text-center" style="background: white; width : 40%">
+                                <p class="text-center">Id</p>
+                                <input th:type="text" class="form-control" th:name="id"
+                                       th:value="${us.id}" readonly/>
+                                <p>Name</p>
+                                <input th:type="text" class="form-control" th:name="name"
+                                       th:value="${us.name}" readonly/>
+
+                                <p>Email</p>
+                                <input th:type="text" class="form-control" th:name="email"
+                                       th:value="${us.email}" readonly/>
+
+                                <p>Password</p>
+                                <input th:type="text" class="form-control" th:name="password"
+                                       th:value="${us.password}" readonly/>
+
+                                <p>Role</p>
+                                <select th:value="${us.roles}" class="form-control"
+                                        th:name="roles1"
+                                        name="roles" multiple size="2" readonly>
+                                    <option th:each="role : ${us.roles}"
+                                            th:value="${role}"
+                                            th:text="${role}">
+                                </select>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button th:type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button th:type="submit"
+                                        class="btn btn-primary">Delete</button>
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -213,7 +268,9 @@
 
 
 
-            <!-- rerere  -->
+
+
+            <div class="tab-pane fade" id="newuser" role="tabpanel" aria-labelledby="nav-newuser">-->
 
 
 
@@ -221,18 +278,6 @@
 
 
 
-
-
-            <!-- delete  -->
-
-
-
-
-
-
-
-
-            <div class="tab-pane fade" id="newuser" role="tabpanel" aria-labelledby="nav-newuser">
 
 
                 <!--            NEw user-->
